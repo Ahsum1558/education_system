@@ -3,43 +3,25 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller
+class UserRegistrationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    public function showRegistrationForm(){
+    	return view('admin.users.registration-form');
+    }
 
-    use RegistersUsers;
+    public function saveUser(Request $request){
+    	$this->validator($request->all())->validate();
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+        event(new Registered($user = $this->create($request->all())));
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-        // $this->middleware('auth');
+        $users = User::all();
+        return view('admin.users.user-list', ['users'=>$users]);
     }
 
     /**
@@ -75,5 +57,10 @@ class RegisterController extends Controller
             'email'     => $data['email'],
             'password'  => Hash::make($data['password']),
         ]);
+    }
+
+    public function userList(){
+    	$users = User::all();
+        return view('admin.users.user-list', ['users'=>$users]);
     }
 }

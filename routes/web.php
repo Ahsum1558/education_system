@@ -15,10 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('admin.home.home');
+    return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register', 'Auth\UserRegistrationController@showRegistrationForm')->name('register')->middleware('auth');
+Route::post('/register', 'Auth\UserRegistrationController@saveUser')->name('user-save')->middleware('auth');
+Route::get('/user-list', 'Auth\UserRegistrationController@userList')->name('user-list')->middleware('auth');
+
+
 
