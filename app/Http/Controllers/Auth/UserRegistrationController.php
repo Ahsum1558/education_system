@@ -8,11 +8,21 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
+// use Auth;
+
 
 class UserRegistrationController extends Controller
 {
     public function showRegistrationForm(){
-    	return view('admin.users.registration-form');
+        if (Auth::user()->role == 'Admin') {
+            return view('admin.users.registration-form');
+        }else{
+            return back();
+            // return redirect('/home');
+        }
     }
 
     public function saveUser(Request $request){
@@ -60,7 +70,12 @@ class UserRegistrationController extends Controller
     }
 
     public function userList(){
-    	$users = User::all();
-        return view('admin.users.user-list', ['users'=>$users]);
+        if (Auth::user()->role == 'Admin') {
+            $users = User::all();
+            return view('admin.users.user-list', ['users'=>$users]);
+        }else{
+            return back();
+            // return redirect('/home');
+        }
     }
 }
