@@ -78,4 +78,35 @@ class UserRegistrationController extends Controller
             // return redirect('/home');
         }
     }
+
+    public function userProfile($userId){
+
+        $user = User::findOrFail($userId);
+        return view('admin.users.profile', ['user'=>$user]); 
+    }
+
+    public function changeUserInfo($id){
+        $user = User::find($id);
+        return view('admin.users.change-user-info', ['user'=>$user]);
+    }
+
+    public function userInfoUpdate(Request $request){
+
+        $this->validate($request, [
+
+            'name'      => 'required|string|max:255',
+            'mobile'    => 'required|string|max:17',
+            'email'     => 'required|string|max:255|email',
+        ]);
+
+        $user = User::find($request->user_id);
+
+        $user->name     = $request->name;
+        $user->mobile   = $request->mobile;
+        $user->email    = $request->email;
+
+        $user->save();
+
+        return redirect("/user-profile/$request->user_id")->with('message', 'Information updated successfully');
+    }
 }

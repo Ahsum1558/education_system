@@ -44,9 +44,20 @@ body{
 }
 /*Content End*/
 
+/*Registration Form*/
+.registration-form{
+    width: 50% !important;
+    margin: 15px auto !important;
+   /*  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%); */
+}
+
 /*Login Form Start*/
 .login-form{
     width: 50%;
+    margin: 15px auto;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -54,19 +65,19 @@ body{
 }
 
 @media (max-width: 1000px) {
-    .login-form{
+    .registration-form, .login-form{
         width: 60%;
     }
 }
 
 @media (max-width: 840px) {
-    .login-form{
+    .registration-form, .login-form{
         width: 80%;
     }
 }
 
 @media (max-width: 610px) {
-    .login-form{
+    .registration-form,.login-form{
         width: 90%;
     }
 }

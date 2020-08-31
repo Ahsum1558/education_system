@@ -39,7 +39,7 @@
 <!--Header End-->
 
 <!--User Avatar Start-->
-<img class="avatar" src="{{ asset('public/admin/assets/images/avatar.png') }}" alt="Avatar">
+<a href="{{ route('home') }}"><img class="avatar" src="{{ asset('public/admin/assets/images/avatar.png') }}" alt="Avatar"></a>
 <!--User Avatar Start-->
 
 <!--Main Menu Start-->
@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.html"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ route('home') }}"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -105,6 +105,7 @@
                             <li><a href="{{ route('user-registration') }}" class="dropdown-item">Add User</a></li>
                             <li><a href="{{ route('user-list') }}" class="dropdown-item">User List</a></li>
                             @endif
+                            <li><a href="{{ route('user-profile', ['userId' => Auth::user()->id]) }}" class="dropdown-item">User Profile</a></li>
                         </ul>
                     </li>
 
