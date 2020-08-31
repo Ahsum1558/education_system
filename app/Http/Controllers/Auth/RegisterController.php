@@ -32,6 +32,17 @@ class RegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        return view('admin.users.registration-form');
+        // return view('auth.register');
+    }
+
+    /**
      * Create a new controller instance.
      *
      * @return void

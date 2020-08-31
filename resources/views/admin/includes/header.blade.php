@@ -39,7 +39,7 @@
 <!--Header End-->
 
 <!--User Avatar Start-->
-<a href="{{ route('home') }}"><img class="avatar" src="{{ asset('public/admin/assets/images/avatar.png') }}" alt="Avatar"></a>
+<a href="{{ route('home') }}"><img class="avatar" src="@if(Auth::user()->avatar){{ asset('/').'/'.$user->avatar }}@else{{ asset('public/admin/assets/images/favicon.png') }}@endif" alt="Avatar"></a>
 <!--User Avatar Start-->
 
 <!--Main Menu Start-->

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Image;
 // use Auth;
 
 
@@ -108,5 +109,51 @@ class UserRegistrationController extends Controller
         $user->save();
 
         return redirect("/user-profile/$request->user_id")->with('message', 'Information updated successfully');
+    }
+
+    public function changeUserAvatar($id){
+         $user = User::find($id);
+        return view('admin.users.change-user-avatar', ['user'=>$user]);
+    }
+
+    public function updateUserPhoto(Request $request){
+         $user = User::find($request->user_id);
+
+         $file = $request->file('avatar');
+         $imageName = $file->getClientOriginalName();
+         $directory = 'admin/assets/avatar/';
+         $imageUrl = $directory.$imageName;
+         // $file->move($directory, $imageUrl);
+         // http://image.intervention.io/getting_started/installation image URL
+         Image::make($file)->resize(300, 300)->save($imageUrl);
+
+         $user->avatar = $imageUrl;
+         $user->save();
+
+         return redirect("/user-profile/$request->user_id")->with('message', 'Photo updated successfully');
+    }
+
+    public function changeUserPassword($id){
+        $user = User::find($id);
+        return view('admin.users.change-user-password', ['user'=>$user]);
+    }
+
+    public function userPasswordUpdate(Request $request){
+
+        $this->validate($request, [
+            'new_password' => 'required|string|min:8',
+        ]);
+
+        $oldPassword = $request->password;
+        $user = User::find($request->user_id);
+
+        if (Hash::check($oldPassword, $user->password)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            return redirect("/user-profile/$request->user_id")->with('message', 'Password Updated Successfully');
+        }else{
+            return back()->with('error_message', 'Old password does not match ! Please try again');
+        }
     }
 }

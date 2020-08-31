@@ -167,8 +167,8 @@ trait AuthenticatesUsers
     public function username()
     {
         // return 'email' or 'mobile';
-        return 'mobile';
-        // return 'email';
+        // return 'mobile';
+        return 'email';
     }
 
     /**
@@ -191,7 +191,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new Response('', 204)
-            : redirect('/home');
+            : redirect('/');
     }
 
     /**
