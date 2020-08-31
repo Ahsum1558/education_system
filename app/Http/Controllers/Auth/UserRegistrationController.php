@@ -121,7 +121,7 @@ class UserRegistrationController extends Controller
 
          $file = $request->file('avatar');
          $imageName = $file->getClientOriginalName();
-         $directory = 'admin/assets/avatar/';
+         $directory = 'public/admin/assets/avatar/';
          $imageUrl = $directory.$imageName;
          // $file->move($directory, $imageUrl);
          // http://image.intervention.io/getting_started/installation image URL

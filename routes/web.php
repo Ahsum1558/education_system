@@ -40,5 +40,8 @@ Route::get('/change-user-password/{id}', 'Auth\UserRegistrationController@change
 Route::post('/user-password-update', 'Auth\UserRegistrationController@userPasswordUpdate')->name('user-password-update')->middleware('auth');
 
 // General Section
-Route::get('add-header-footer', 'HomePageController@addHeaderFooterForm')->name('add-header-footer');
-Route::post('add-header-footer', 'HomePageController@headerFooterSave')->name('header-footer-save');
+Route::get('/add-header-footer', 'HomePageController@addHeaderFooterForm')->name('add-header-footer');
+Route::post('/add-header-footer', 'HomePageController@headerFooterSave')->name('header-footer-save');
+
+Route::get('/manage-header-footer/{id}', 'HomePageController@manageHeaderFooter')->name('manage-header-footer');
+Route::post('/header-footer-update', 'HomePageController@headerFooterUpdate')->name('header-footer-update');
