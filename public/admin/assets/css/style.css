@@ -187,3 +187,23 @@ body{
 }
 /*Owl carosel End*/
 
+/*Slider Caption Start*/
+
+.item{
+    position: relative;
+}
+.item .slide-caption {
+    position: absolute;
+    bottom: 5%;
+    width: 80%;
+    overflow: hidden;
+    left: 50%;
+    background: rgba(0,0,0,0.4);
+    transform: translateX(-50%);
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    padding-top: 15px;
+}
+
+/*Slider Caption End*/

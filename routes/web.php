@@ -40,8 +40,13 @@ Route::get('/change-user-password/{id}', 'Auth\UserRegistrationController@change
 Route::post('/user-password-update', 'Auth\UserRegistrationController@userPasswordUpdate')->name('user-password-update')->middleware('auth');
 
 // General Section
+// Header And Footer Section
 Route::get('/add-header-footer', 'HomePageController@addHeaderFooterForm')->name('add-header-footer');
 Route::post('/add-header-footer', 'HomePageController@headerFooterSave')->name('header-footer-save');
 
 Route::get('/manage-header-footer/{id}', 'HomePageController@manageHeaderFooter')->name('manage-header-footer');
 Route::post('/header-footer-update', 'HomePageController@headerFooterUpdate')->name('header-footer-update');
+
+// Slider Section
+Route::get('/add-slide', 'SliderController@addSlide')->name('add-slide');
+Route::post('/upload-slide', 'SliderController@uploadSlide')->name('upload-slide');
