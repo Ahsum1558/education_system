@@ -46,12 +46,8 @@ body{
 
 /*Registration Form*/
 .registration-form{
-    width: 50% !important;
-    margin: 15px auto !important;
-   /*  position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%); */
+    width: 50%;
+    margin: 10px auto;
 }
 
 /*Login Form Start*/

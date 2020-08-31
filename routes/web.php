@@ -22,8 +22,9 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Authentication
 Route::get('/user-registration', 'Auth\UserRegistrationController@showRegistrationForm')->name('user-registration')->middleware('auth');
-Route::post('/user-save', 'Auth\UserRegistrationController@saveUser')->name('user-save')->middleware('auth');
+Route::post('/user-registration', 'Auth\UserRegistrationController@saveUser')->name('user-save')->middleware('auth');
 
 Route::get('/user-list', 'Auth\UserRegistrationController@userList')->name('user-list')->middleware('auth');
 
@@ -38,3 +39,6 @@ Route::post('/update-user-photo', 'Auth\UserRegistrationController@updateUserPho
 Route::get('/change-user-password/{id}', 'Auth\UserRegistrationController@changeUserPassword')->name('change-user-password')->middleware('auth');
 Route::post('/user-password-update', 'Auth\UserRegistrationController@userPasswordUpdate')->name('user-password-update')->middleware('auth');
 
+// General Section
+Route::get('add-header-footer', 'HomePageController@addHeaderFooterForm')->name('add-header-footer');
+Route::post('add-header-footer', 'HomePageController@headerFooterSave')->name('header-footer-save');
