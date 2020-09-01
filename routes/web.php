@@ -50,3 +50,12 @@ Route::post('/header-footer-update', 'HomePageController@headerFooterUpdate')->n
 // Slider Section
 Route::get('/add-slide', 'SliderController@addSlide')->name('add-slide');
 Route::post('/upload-slide', 'SliderController@uploadSlide')->name('upload-slide');
+
+Route::get('/manage-slide', 'SliderController@manageSlide')->name('manage-slide');
+Route::get('/slide-unpublished/{id}', 'SliderController@slideUnpublished')->name('slide-unpublished');
+Route::get('/slide-published/{id}', 'SliderController@slidePublished')->name('slide-published');
+Route::get('/slide-edit/{id}', 'SliderController@slideEdit')->name('slide-edit');
+Route::post('/update-slide', 'SliderController@updateSlide')->name('update-slide');
+Route::get('/slide-delete/{id}', 'SliderController@slideDelete')->name('slide-delete');
+
+Route::get('/photo-gallery', 'SliderController@photoGallery')->name('photo-gallery');
