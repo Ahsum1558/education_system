@@ -47,7 +47,7 @@ Route::post('/add-header-footer', 'HomePageController@headerFooterSave')->name('
 Route::get('/manage-header-footer/{id}', 'HomePageController@manageHeaderFooter')->name('manage-header-footer');
 Route::post('/header-footer-update', 'HomePageController@headerFooterUpdate')->name('header-footer-update');
 
-// Slider Section
+// Slider Section Start
 Route::get('/add-slide', 'SliderController@addSlide')->name('add-slide');
 Route::post('/upload-slide', 'SliderController@uploadSlide')->name('upload-slide');
 
@@ -59,3 +59,16 @@ Route::post('/update-slide', 'SliderController@updateSlide')->name('update-slide
 Route::get('/slide-delete/{id}', 'SliderController@slideDelete')->name('slide-delete');
 
 Route::get('/photo-gallery', 'SliderController@photoGallery')->name('photo-gallery');
+// Slider Section End
+
+// School Management Section Start
+Route::get('/school/add', 'School\SchoolManagementController@addSchoolForm')->name('add-school');
+Route::post('/school/add', 'School\SchoolManagementController@schoolSave')->name('school-save');
+Route::get('/school/list', 'School\SchoolManagementController@schoolList')->name('school-list');
+Route::get('/school/unpublished/{id}', 'School\SchoolManagementController@schoolUnpublished')->name('school-unpublished');
+Route::get('/school/published/{id}', 'School\SchoolManagementController@schoolPublished')->name('school-published');
+Route::get('/school/edit/{id}', 'School\SchoolManagementController@schoolEditForm')->name('school-edit');
+Route::post('/school/update', 'School\SchoolManagementController@schoolUpdate')->name('school-update');
+Route::get('/school/delete/{id}', 'School\SchoolManagementController@schoolDelete')->name('school-delete');
+// School Management Section End
+
