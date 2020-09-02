@@ -72,3 +72,18 @@ Route::post('/school/update', 'School\SchoolManagementController@schoolUpdate')-
 Route::get('/school/delete/{id}', 'School\SchoolManagementController@schoolDelete')->name('school-delete');
 // School Management Section End
 
+// Class Management Section Start
+Route::get('/class/add', 'School\ClassManagementController@addClassForm')->name('add-class');
+Route::post('/class/add', 'School\ClassManagementController@classSave')->name('class-save');
+Route::get('/class/list', 'School\ClassManagementController@classList')->name('class-list');
+Route::get('/class/unpublished/{id}', 'School\ClassManagementController@classUnpublished')->name('class-unpublished');
+Route::get('/class/published/{id}', 'School\ClassManagementController@classPublished')->name('class-published');
+Route::get('/class/edit/{id}', 'School\ClassManagementController@classEditForm')->name('class-edit');
+Route::post('/class/update', 'School\ClassManagementController@classUpdate')->name('class-update');
+Route::get('/class/delete/{id}', 'School\ClassManagementController@classDelete')->name('class-delete');
+// Class Management Section End
+
+// Batch Management Section Start
+Route::get('/batch/add', 'School\BatchManagementController@addBatchForm')->name('add-batch');
+// Batch Management Section End
+
