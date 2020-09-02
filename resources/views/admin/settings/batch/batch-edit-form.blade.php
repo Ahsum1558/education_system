@@ -16,11 +16,11 @@
 
     <div class="form-group">
         <div class="col-sm-12">
-            <h4 class="text-center font-weight-bold font-italic mt-3">Batch Add Form</h4>
+            <h4 class="text-center font-weight-bold font-italic mt-3">Batch Edit Form</h4>
         </div>
     </div>
 
-    <form action="{{ route('batch-save') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('batch-update') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="table-responsive p-1">
             <table id="" class="table table-bordered dt-responsive nowrap text-center" style="width: 100%;">
@@ -33,7 +33,7 @@
                                 <select name="class_id" class="form-control @error('class_id') is-invalid @enderror" id="classId" required autofocus>
                                     <option value="">Select Class</option>
                                 @foreach($classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->class_name }}</option>
+                                    <option value="{{ $class->id }}" {{ $class->id == $batch->class_id ? 'selected' : '' }}>{{ $class->class_name }}</option>
                                 @endforeach
                                 </select>
                                 @error('class_id')
@@ -49,7 +49,7 @@
                         <div class="form-group row mb-0">
                             <label for="bathName" class="col-form-label col-sm-3 text-right">Batch Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control @error('batch_name') is-invalid @enderror" name="batch_name" value="{{ old('batch_name') }}" id="bathName" placeholder="Write batch name here" required>
+                                <input type="text" class="form-control @error('batch_name') is-invalid @enderror" name="batch_name" value="{{ $batch->batch_name }}" id="bathName" placeholder="Write batch name here" required>
                                 @error('batch_name')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -62,7 +62,7 @@
                         <div class="form-group row mb-0">
                             <label for="studentCapacity" class="col-form-label col-sm-3 text-right">Student Capacity</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control @error('student_capacity') is-invalid @enderror" name="student_capacity" value="{{ old('student_capacity') }}" id="studentCapacity" placeholder="Write student capacity here" required>
+                                <input type="text" class="form-control @error('student_capacity') is-invalid @enderror" name="student_capacity" value="{{ $batch->student_capacity }}" id="studentCapacity" placeholder="Write student capacity here" required>
                                 @error('student_capacity')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -71,8 +71,9 @@
                     </td>
                 </tr>
 
+                <input type="hidden" name="batch_id" value="{{ $batch->id }}">
 
-                <tr><td><button type="submit" class="btn btn-block my-btn-submit">Save</button></td></tr>
+                <tr><td><button type="submit" class="btn btn-block my-btn-submit">Update</button></td></tr>
             </table>
         </div>
     </form>

@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('public/admin/assets/plugins/data-table/css/fixedHeader.bootstrap4.min.css') }}">
     <!--    Theme Stylesheet-->
     <link rel="stylesheet" href="{{ asset('public/admin/assets/css/style.css') }}">
+    <!--    jQuery-->
+    <script src="{{ asset('public/admin/assets/js/jquery-3.5.1.min.js') }}"></script>
     <!--    Favicon-->
     <link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.png') }}" type="image/x-icon">
 </head>
@@ -103,7 +105,7 @@
                         <a class="dropdown-item dropdown-toggle" href="#">Batch</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('add-batch') }}" class="dropdown-item">Add Batch</a></li>
-                            <li><a href="#" class="dropdown-item">Batch List</a></li>
+                            <li><a href="{{ route('batch-list') }}" class="dropdown-item">Batch List</a></li>
                         </ul>
                     </li>
 
