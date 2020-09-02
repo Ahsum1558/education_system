@@ -95,3 +95,9 @@ Route::post('/batch/update', 'School\BatchManagementController@batchUpdate')->na
 Route::get('/batch/delete', 'School\BatchManagementController@batchDelete')->name('batch-delete');
 // Batch Management Section End
 
+// Student Type Management Section Start
+Route::get('/student-type', 'School\StudentTypeController@index')->name('student-type');
+Route::post('/student-type-add', 'School\StudentTypeController@studentTypeAdd')->name('student-type-add');
+Route::get('/student-type-list', 'School\StudentTypeController@studentTypeList')->name('student-type-list');
+// Student Type Management Section End
+

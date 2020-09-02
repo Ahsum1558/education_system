@@ -28,7 +28,7 @@
                  <tr>
                     <td>
                         <div class="form-group row mb-0">
-                            <label for="classId" class="col-form-label col-sm-3 text-right">Batch Name</label>
+                            <label for="classId" class="col-form-label col-sm-3 text-right">Class Name</label>
                             <div class="col-sm-9">
                                 <select name="class_id" class="form-control @error('class_id') is-invalid @enderror" id="classId" required autofocus>
                                     <option value="">Select Class</option>
