@@ -5,23 +5,7 @@
 <div class="row content">
     <div class="col-md-8 offset-md-2 pl-0 pr-0">
 
-        @if(Session::get('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success : </strong> {{ Session::get('message') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-
-        @if(Session::get('error_message'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Error: </strong> {{ Session::get('error_message') }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-            @endif
+        @include('admin.includes.alert')
 
         <div class="form-group">
             <div class="col-sm-12">
@@ -32,7 +16,9 @@
             <table id="" class="table table-bordered dt-responsive nowrap text-center" style="width: 100%;">
                 <tr>
                     <td>
-                        <div class="form-group row mb-0">
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="form-group row mb-0">
                             <label for="classId" class="col-form-label col-sm-3 text-right">Batch Name</label>
                             <div class="col-sm-9">
                                 <select name="class_id" class="form-control @error('class_id') is-invalid @enderror" id="classId" required autofocus>
@@ -44,6 +30,22 @@
                                 @error('class_id')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
+                            </div>
+                        </div>
+                          </div>
+                        <div class="col-md">
+                            <div class="form-group row mb-0">
+                            <label for="typeId" class="col-form-label col-sm-3 text-right">Student Type</label>
+                            <div class="col-sm-9">
+                                <select name="type_id" class="form-control @error('type_id') is-invalid @enderror" id="typeId" required>
+                                    <option value="">Select Coures</option>
+                                </select>
+                                @error('type_id')
+                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                        </div>
+                      
                             </div>
                         </div>
                     </td>
@@ -58,13 +60,39 @@
 </div>
 </section>
 <!--Content End-->
+
+@include('admin.includes.loader')
+<style>#overlay .loader{display: none;} </style>
 <script>
-    $('#classId').change(function(){
-        var id = $(this).val();
-        if(id){
-            $.get("{{ route('batch-list-by-ajax') }}", {id:id}, function(data){
+     $('#classId').change(function() {
+        var classId = $(this).val();
+        if(classId){
+            $('#overlay .loader').show();
+            $.get("{{ route('class-wise-student-type') }}", {class_id:classId}, function(data){
+                $('#overlay .loader').hide();
+                console.log(data);
+                $('#typeId').empty().html(data);
+            });
+        }else{
+            $('#typeId').empty().html('<option value="">Select Type</option>');
+        }
+    });
+
+     $('#typeId').change(function(){
+        var studentTypeId = $(this).val();
+        var classId = $('#classId').val();
+        if(classId && studentTypeId){
+            $('#overlay .loader').show();
+            $.get("{{ route('batch-list-by-ajax') }}", {
+                class_id:classId,
+                type_id:studentTypeId,
+            }, function(data){
+                $('#overlay .loader').hide();
+                console.log(data);
                 $("#batchList").html(data);
             })
+        }else{
+            $("#batchList").empty();
         }
     })
 </script>

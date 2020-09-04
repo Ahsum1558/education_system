@@ -86,6 +86,7 @@ Route::get('/class/delete/{id}', 'School\ClassManagementController@classDelete')
 // Batch Management Section Start
 Route::get('/batch/add', 'School\BatchManagementController@addBatchForm')->name('add-batch');
 Route::post('/batch/add', 'School\BatchManagementController@batchSave')->name('batch-save');
+Route::get('/batch/class-wise-student-type', 'School\BatchManagementController@classWiseStudentType')->name('class-wise-student-type');
 Route::get('/batch/list', 'School\BatchManagementController@batchList')->name('batch-list');
 Route::get('/batch/list-by-ajax', 'School\BatchManagementController@batchListByAjax')->name('batch-list-by-ajax');
 Route::get('/batch/unpublished', 'School\BatchManagementController@batchUnpublished')->name('batch-unpublished');

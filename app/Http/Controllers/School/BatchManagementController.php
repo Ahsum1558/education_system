@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\ClassName;
 use App\Model\Batch;
+use App\Model\StudentType;
 
 class BatchManagementController extends Controller
 {
@@ -18,20 +19,29 @@ class BatchManagementController extends Controller
 
     public function batchSave(Request $request){
     	$this->validate($request, [
-    		'class_id'=>'required',
+            'class_id'=>'required',
+    		'type_id'=>'required',
     		'batch_name'=>'required|string',
     		'student_capacity'=>'required',
     		
     	]);
 
     	$data = new Batch();
-    	$data->class_id = $request->class_id;
+        $data->class_id = $request->class_id;
+    	$data->student_type_id = $request->type_id;
     	$data->batch_name = $request->batch_name;
     	$data->student_capacity = $request->student_capacity;
     	$data->status = 1;
     	$data->save();
 
     	return back()->with('message', 'Batch name added successfully');
+    }
+
+    public function classWiseStudentType(Request $request){
+        $types = StudentType::where([
+            'class_id'=>$request->class_id
+        ])->where('status','!=',3)->get();
+        return view('admin.settings.batch.class-wise-student-type', ['types'=>$types]);
     }
 
     public function batchList(){
@@ -42,7 +52,10 @@ class BatchManagementController extends Controller
     }
 
     public function batchListByAjax(Request $request){
-    	$batches = Batch::where(['class_id'=>$request->id])->get();
+    	$batches = Batch::where([
+            'class_id'=>$request->class_id,
+            'student_type_id'=>$request->type_id,
+        ])->where('status','!=',3)->get();
 
     	if (count($batches)>0) {
     		return view('admin.settings.batch.batch-list-by-ajax', [

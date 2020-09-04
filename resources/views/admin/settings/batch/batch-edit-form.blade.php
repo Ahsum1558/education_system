@@ -5,14 +5,7 @@
 <div class="row content">
     <div class="col-md-8 offset-md-2 pl-0 pr-0">
 
-    @if(Session::get('message'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success : </strong> {{ Session::get('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+    @include('admin.includes.alert')
 
     <div class="form-group">
         <div class="col-sm-12">
@@ -28,7 +21,7 @@
                  <tr>
                     <td>
                         <div class="form-group row mb-0">
-                            <label for="classId" class="col-form-label col-sm-3 text-right">Batch Name</label>
+                            <label for="classId" class="col-form-label col-sm-3 text-right">Class Name</label>
                             <div class="col-sm-9">
                                 <select name="class_id" class="form-control @error('class_id') is-invalid @enderror" id="classId" required autofocus>
                                     <option value="">Select Class</option>
@@ -47,9 +40,9 @@
                 <tr>
                     <td>
                         <div class="form-group row mb-0">
-                            <label for="bathName" class="col-form-label col-sm-3 text-right">Batch Name</label>
+                            <label for="batchName" class="col-form-label col-sm-3 text-right">Batch Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control @error('batch_name') is-invalid @enderror" name="batch_name" value="{{ $batch->batch_name }}" id="bathName" placeholder="Write batch name here" required>
+                                <input type="text" class="form-control @error('batch_name') is-invalid @enderror" name="batch_name" value="{{ $batch->batch_name }}" id="batchName" placeholder="Write batch name here" required>
                                 @error('batch_name')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
