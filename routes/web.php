@@ -99,6 +99,10 @@ Route::get('/batch/delete', 'School\BatchManagementController@batchDelete')->nam
 Route::get('/student-type', 'School\StudentTypeController@index')->name('student-type');
 Route::post('/student-type-add', 'School\StudentTypeController@studentTypeAdd')->name('student-type-add');
 Route::get('/student-type-list', 'School\StudentTypeController@studentTypeList')->name('student-type-list');
+Route::get('/student-type-unpublish', 'School\StudentTypeController@studentTypeUnpublish')->name('student-type-unpublish');
+Route::get('/student-type-publish', 'School\StudentTypeController@studentTypePublish')->name('student-type-publish');
+Route::post('/student-type-update', 'School\StudentTypeController@studentTypeUpdate')->name('student-type-update');
+Route::get('/student-type-delete', 'School\StudentTypeController@studentTypeDelete')->name('student-type-delete');
 // Student Type Management Section End
-//My test
+
 
