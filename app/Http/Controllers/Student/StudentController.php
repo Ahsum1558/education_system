@@ -13,6 +13,7 @@ use App\Model\StudentTypeDetails;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Image;
+use DB;
 
 class StudentController extends Controller
 {
@@ -26,7 +27,7 @@ class StudentController extends Controller
     }
 
     public function bringStudentType(Request $request){
-    	$types = StudentType::where('class_id','=',$request->class_id)->where('status','!=',3)->get();
+    	$types = StudentType::where('class_id','=',$request->class_id)->where('status','=',1)->get();
     	$classes = ClassName::where('status','=',1)->get();
     	return view('admin.student.registration.student-types', [
     		'types'=>$types,
@@ -49,6 +50,13 @@ class StudentController extends Controller
 
     public function studentSave(Request $request){
         $student                        = new Student();
+
+        if ( $request -> hasFile('student_photo') ) {
+            $img = $request -> file('student_photo');
+            $unique_file_name = md5(time().rand()) . '.' . $img -> getClientOriginalExtension();
+            $img -> move(public_path('admin/assets/students/') , $unique_file_name);
+        }
+
         $student->student_name          = $request->student_name;
         $student->school_id             = $request->school_id;
         $student->class_id              = $request->class_id;
@@ -61,24 +69,24 @@ class StudentController extends Controller
         $student->email_address         = $request->email_address;
         $student->sms_mobile            = $request->sms_mobile;
         $student->date_of_admission     = $request->date_of_admission;
-        $student->student_photo         = $request->student_photo;
+        $student->student_photo         = $unique_file_name;
         $student->address               = $request->address;
         $student->status                = 1;
         $student->password              = $request->sms_mobile;
         $student->encrypted_password    = Hash::make($request->sms_mobile);
         $student->user_id               = Auth::user()->id;
+        $student->save();
+
+
         
 
-        $file = $request->file('student_photo');
-         $imageName = $file->getClientOriginalName();
-         $directory = 'public/admin/assets/students/';
-         $imageUrl = $directory.$imageName;
-         // $file->move($directory, $imageUrl);
-         // http://image.intervention.io/getting_started/installation image URL
-         Image::make($file)->resize(300, 300)->save($imageUrl);
-
-         $student->student_photo = $imageUrl;
-         $student->save();
+        // $file = $request->file('student_photo');
+        //  $imageName = $file->getClientOriginalName();
+        //  $directory = 'public/admin/assets/students/';
+        //  $imageUrl = $directory.$imageName;
+        //  Image::make($file)->resize(300, 300)->save($imageUrl);
+        //  $student->student_photo = $imageUrl;
+         
 
         $studentId = $student->id;
         $batches = $request->batch_id;
@@ -96,5 +104,53 @@ class StudentController extends Controller
             $data->save();
         }
         return back()->with('message', 'Registration Successful');
+    }
+
+    public function allRunningStudentLsit(){
+        $students = DB::table('students')
+        ->join('schools','students.school_id','=','schools.id')
+        ->join('class_names','students.class_id','=','class_names.id')
+        ->select('students.*','schools.school_name','class_names.class_name')
+        ->where([
+            'students.status'=>1
+        ])->orderBy('students.class_id','ASC')->get();
+        return view('admin.student.all-running-students', ['students'=>$students]);
+    }
+
+    public function classSelectionForm(){
+        $classes = ClassName::where('status','=',1)->get();
+        return view('admin.student.class.class-selection-form', [
+            'classes'=>$classes
+        ]);
+    }
+
+    public function classWiseStudentType(Request $request){
+        $classId = $request->class_id;
+        $types = StudentType::where([
+            'class_id'=>$classId,
+            'status'=>1
+        ])->get();
+        return view('admin.student.class.student-type', [
+            'types'=>$types
+        ]);
+    }
+
+    public function classAndTypeWiseStudent(Request $request){
+        $students = DB::table('students')
+        ->join('schools','students.school_id','=','schools.id')
+        ->join('student_type_details','student_type_details.student_id','=','students.id')
+        // ->join('student_types','student_type_details.student_type_id','=','student_types.id')
+        ->join('batches','student_type_details.batch_id','=','batches.id')
+        ->select('students.*','schools.school_name','student_type_details.roll_no','batches.batch_name')
+        ->where([
+            'students.status'=>1,
+            'students.class_id'=>$request->class_id,
+            'student_type_details.type_id'=>$request->type_id,
+            'student_type_details.type_status'=>1
+        ])->orderBy('student_type_details.roll_no','ASC')->get();
+
+        return view('admin.student.class.student-list', [
+            'students'=>$students
+        ]);
     }
 }

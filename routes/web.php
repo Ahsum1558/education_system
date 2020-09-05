@@ -111,6 +111,10 @@ Route::get('/student/registration-form', 'Student\StudentController@studentRegis
 Route::get('/bring-student-type', 'Student\StudentController@bringStudentType')->name('bring-student-type');
 Route::get('/batch-roll-form', 'Student\StudentController@batchRollForm')->name('batch-roll-form');
 Route::post('/student/registration-form', 'Student\StudentController@studentSave')->name('student-save');
+Route::get('/student/all-running-student-lsit', 'Student\StudentController@allRunningStudentLsit')->name('all-running-student-lsit');
+Route::get('/student/class-selection-form', 'Student\StudentController@classSelectionForm')->name('class-selection-form');
+Route::get('/student/class-wise-student-type', 'Student\StudentController@classWiseStudentType')->name('class-wise-student-type');
+Route::get('/student/class-and-type-wise-student', 'Student\StudentController@classAndTypeWiseStudent')->name('class-and-type-wise-student');
 // Student Management Section End
 
 

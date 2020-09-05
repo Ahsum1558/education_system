@@ -9,15 +9,6 @@
 
              @include('admin.includes.alert')
 
-            @if(Session::get('error_message'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Error: </strong> {{ Session::get('error_message') }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-            @endif
-
             <div class="form-group">
                 <div class="col-sm-12">
                     <h4 class="text-center font-weight-bold font-italic mt-3">Slide List</h4>
@@ -25,7 +16,7 @@
             </div>
 
             <div class="table-responsive p-1">
-                <table id="example" class="table table-striped table-bordered dt-responsive nowrap text-center" style="width: 100%;">
+                <table id="example" class="table table-striped table-bordered dt-responsive text-center" style="width: 100%;">
                     <thead>
                     <tr>
                         <th>SL</th>
