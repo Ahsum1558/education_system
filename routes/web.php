@@ -106,4 +106,11 @@ Route::post('/student-type-update', 'School\StudentTypeController@studentTypeUpd
 Route::get('/student-type-delete', 'School\StudentTypeController@studentTypeDelete')->name('student-type-delete');
 // Student Type Management Section End
 
+// Student Management Section Start
+Route::get('/student/registration-form', 'Student\StudentController@studentRegistrationForm')->name('student-registration-form');
+Route::get('/bring-student-type', 'Student\StudentController@bringStudentType')->name('bring-student-type');
+Route::get('/batch-roll-form', 'Student\StudentController@batchRollForm')->name('batch-roll-form');
+Route::post('/student/registration-form', 'Student\StudentController@studentSave')->name('student-save');
+// Student Management Section End
+
 
