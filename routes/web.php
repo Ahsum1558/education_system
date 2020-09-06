@@ -115,6 +115,8 @@ Route::get('/student/all-running-student-lsit', 'Student\StudentController@allRu
 Route::get('/student/class-selection-form', 'Student\StudentController@classSelectionForm')->name('class-selection-form');
 Route::get('/student/class-wise-student-type', 'Student\StudentController@classWiseStudentType')->name('class-wise-student-type');
 Route::get('/student/class-and-type-wise-student', 'Student\StudentController@classAndTypeWiseStudent')->name('class-and-type-wise-student');
+Route::get('/student/details/{id}', 'Student\StudentController@studentDetails')->name('student-details');
+Route::post('/student/ basic-info-update', 'Student\StudentController@studentBasicInfoUpdate')->name('student-basic-info-update');
 // Student Management Section End
 
 
