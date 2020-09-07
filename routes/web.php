@@ -112,11 +112,29 @@ Route::get('/bring-student-type', 'Student\StudentController@bringStudentType')-
 Route::get('/batch-roll-form', 'Student\StudentController@batchRollForm')->name('batch-roll-form');
 Route::post('/student/registration-form', 'Student\StudentController@studentSave')->name('student-save');
 Route::get('/student/all-running-student-lsit', 'Student\StudentController@allRunningStudentLsit')->name('all-running-student-lsit');
+// Class wise student list
 Route::get('/student/class-selection-form', 'Student\StudentController@classSelectionForm')->name('class-selection-form');
 Route::get('/student/class-wise-student-type', 'Student\StudentController@classWiseStudentType')->name('class-wise-student-type');
 Route::get('/student/class-and-type-wise-student', 'Student\StudentController@classAndTypeWiseStudent')->name('class-and-type-wise-student');
 Route::get('/student/details/{id}', 'Student\StudentController@studentDetails')->name('student-details');
-Route::post('/student/ basic-info-update', 'Student\StudentController@studentBasicInfoUpdate')->name('student-basic-info-update');
+Route::post('/student/basic-info-update', 'Student\StudentController@studentBasicInfoUpdate')->name('student-basic-info-update');
+// Batch wise student list
+Route::get('/student/batch-selection-form', 'Student\StudentController@batchSelectionForm')->name('batch-selection-form');
+Route::get('/student/class-and-type-wise-batch-list', 'Student\StudentController@classAndTypeWiseBatchList')->name('class-and-type-wise-batch-list');
+Route::get('/student/batch-wise-student-list', 'Student\StudentController@batchWiseStudentList')->name('batch-wise-student-list');
 // Student Management Section End
 
+// Student Attendance Section Start
+Route::get('/attendance/add', 'Student\StudentAttendanceController@batchSelectionFormForAttendanceAdd')->name('add-attendance');
+Route::get('/attendance/batch-wise-student-list', 'Student\StudentAttendanceController@batchWiseStudentListForAttendance')->name('batch-wise-student-list-for-attendance');
+Route::post('/attendance/add-attendance', 'Student\StudentAttendanceController@saveStudentAttendance')->name('save-student-attendance');
+Route::get('/attendance/view', 'Student\StudentAttendanceController@viewAttendance')->name('view-attendance');
+Route::get('/attendance/batch-wise-student-attendance-view', 'Student\StudentAttendanceController@batchWiseStudentAttendanceView')->name('batch-wise-student-attendance-view');
+Route::get('/attendance/edit', 'Student\StudentAttendanceController@editAttendance')->name('edit-attendance');
+Route::get('/attendance/student-list-for-attendance-edit', 'Student\StudentAttendanceController@studentListForAttendanceEdit')->name('student-list-for-attendance-edit');
+Route::post('/attendance/edit', 'Student\StudentAttendanceController@studentAttendanceUpdate')->name('student-attendance-update');
+// Student Attendance Section End
 
+// Date Management Section Start
+Route::get('/date/add-year', 'Student\DateManagementController@addYear')->name('add-year');
+// Date Management Section End

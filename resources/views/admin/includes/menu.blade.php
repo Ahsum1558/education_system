@@ -18,7 +18,19 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <li class=""><a class="dropdown-item" href="{{ route('student-registration-form') }}">Registration</a></li>
                     <li class=""><a class="dropdown-item" href="{{ route('all-running-student-lsit') }}">All Running Student List</a></li>
-                    <li class=""><a class="dropdown-item" href="{{ route('class-selection-form') }}">Class Wise List</a></li>
+                    <li class=""><a class="dropdown-item" href="{{ route('class-selection-form') }}">Class Wise Student List</a></li>
+                    <li class=""><a class="dropdown-item" href="{{ route('batch-selection-form') }}">Batch Wise Student List</a></li>
+                </ul>
+            </li>
+
+             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Attendance
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li class=""><a class="dropdown-item" href="{{ route('add-attendance') }}">Add Attendance</a></li>
+                    <li class=""><a class="dropdown-item" href="{{ route('view-attendance') }}">View Attendance</a></li>
+                    <li class=""><a class="dropdown-item" href="{{ route('edit-attendance') }}">Edit Attendance</a></li>
                 </ul>
             </li>
 
@@ -85,6 +97,14 @@
                             <li><a href="{{ route('user-list') }}" class="dropdown-item">User List</a></li>
                             @endif
                             <li><a href="{{ route('user-profile', ['userId' => Auth::user()->id]) }}" class="dropdown-item">User Profile</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Date</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('add-year') }}" class="dropdown-item">Add Year</a></li>
                         </ul>
                     </li>
 

@@ -57,12 +57,14 @@ class StudentController extends Controller
         //     $img -> move(public_path('admin/assets/students/') , $unique_file_name);
         // }
 
+
         $file = $request->file('student_photo');
          $imageName = $file->getClientOriginalName();
          $directory = 'public/admin/assets/students/';
          $imageUrl = $directory.$imageName;
          Image::make($file)->resize(300, 300)->save($imageUrl);
          $student->student_photo = $imageUrl;
+        
 
         $student->student_name          = $request->student_name;
         $student->school_id             = $request->school_id;
@@ -82,12 +84,7 @@ class StudentController extends Controller
         $student->password              = $request->sms_mobile;
         $student->encrypted_password    = Hash::make($request->sms_mobile);
         $student->user_id               = Auth::user()->id;
-        $student->save();
-
-
-        
-
-                
+        $student->save();                
 
         $studentId = $student->id;
         $batches = $request->batch_id;
@@ -222,5 +219,43 @@ class StudentController extends Controller
          Image::make($file)->resize(300, 300)->save($imageUrl);
          $student->student_photo = $imageUrl;
          $student->save();
+    }
+
+    public function batchSelectionForm(){
+        $classes = ClassName::where('status','=',1)->get();
+        return view('admin.student.batch.batch-selection-form', [
+            'classes'=>$classes
+        ]);
+    }
+
+    public function classAndTypeWiseBatchList(Request $request){
+        $batches = Batch::where([
+            'class_id'=>$request->class_id,
+            'student_type_id'=>$request->type_id,
+            'status'=>1,
+        ])->get();
+        return view('admin.student.batch.batch-list', [
+            'batches'=>$batches
+        ]);
+    }
+
+    public function batchWiseStudentList(Request $request){
+        $students = DB::table('students')
+        ->join('schools','students.school_id','=','schools.id')
+        ->join('student_type_details','student_type_details.student_id','=','students.id')
+        // ->join('student_types','student_type_details.student_type_id','=','student_types.id')
+        ->join('batches','student_type_details.batch_id','=','batches.id')
+        ->select('students.*','schools.school_name','student_type_details.roll_no','batches.batch_name')
+        ->where([
+            'students.status'=>1,
+            'students.class_id'=>$request->class_id,
+            'student_type_details.type_id'=>$request->type_id,
+            'student_type_details.batch_id'=>$request->batch_id,
+            'student_type_details.type_status'=>1
+        ])->orderBy('student_type_details.roll_no','ASC')->get();
+
+        return view('admin.student.batch.student-list', [
+            'students'=>$students
+        ]);
     }
 }
