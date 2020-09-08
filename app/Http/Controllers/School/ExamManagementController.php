@@ -50,6 +50,19 @@ class ExamManagementController extends Controller
         }
     }
 
+    public function courseWiseExamList(Request $request){
+        if ($request->ajax()){
+            $exams = Exam::where([
+                'class_id'=>$request->class_id,
+                'type_id'=>$request->type_id,
+            ])->get();
+
+             return view('admin.settings.paper.course-wise-exam-list', [
+            'exams'=>$exams
+        ]);
+        }
+    }
+
     public function examDeactivate(Request $request){
         if ($request->ajax()){
             $exam = Exam::find($request->exam_id);

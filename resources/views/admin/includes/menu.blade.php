@@ -74,6 +74,13 @@
                             <li><a href="{{ route('exam-list') }}" class="dropdown-item">Exam List</a></li>
                         </ul>
                     </li>
+                     <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Paper</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('add-paper') }}" class="dropdown-item">Add Paper</a></li>
+                            <li><a href="{{ route('paper-list') }}" class="dropdown-item">Paper List</a></li>
+                        </ul>
+                    </li>
 
                     <li><a class="dropdown-item" href="{{ route('student-type') }}">Student Type</a></li>
 

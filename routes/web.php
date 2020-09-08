@@ -101,9 +101,17 @@ Route::get('/exam/add', 'School\ExamManagementController@addExamForm')->name('ad
 Route::post('/exam/add', 'School\ExamManagementController@addExam')->name('add-exam');
 Route::get('/exam/list', 'School\ExamManagementController@examList')->name('exam-list');
 Route::get('/exam/list-by-ajax', 'School\ExamManagementController@examListByAjax')->name('exam-list-by-ajax');
+Route::get('/exam/course-wise-exam-list', 'School\ExamManagementController@courseWiseExamList')->name('course-wise-exam-list');
 Route::get('/exam/deactivate', 'School\ExamManagementController@examDeactivate')->name('exam-deactivate');
 Route::get('/exam/activate', 'School\ExamManagementController@examActivate')->name('exam-activate');
 // Exam Management Section End
+
+// Paper Management Section Start
+Route::get('/paper/add', 'School\PaperManagementController@addPaperForm')->name('add-paper');
+Route::post('/paper/add', 'School\PaperManagementController@addPaper')->name('add-paper');
+Route::get('/paper/list', 'School\PaperManagementController@paperList')->name('paper-list');
+Route::get('/paper/exam-wise-paper-list', 'School\PaperManagementController@examWisePaperList')->name('exam-wise-paper-list');
+// Paper Management Section End
 
 
 
