@@ -96,6 +96,23 @@ Route::post('/batch/update', 'School\BatchManagementController@batchUpdate')->na
 Route::get('/batch/delete', 'School\BatchManagementController@batchDelete')->name('batch-delete');
 // Batch Management Section End
 
+// Exam Management Section Start
+Route::get('/exam/add', 'School\ExamManagementController@addExamForm')->name('add-exam');
+Route::post('/exam/add', 'School\ExamManagementController@addExam')->name('add-exam');
+Route::get('/exam/list', 'School\ExamManagementController@examList')->name('exam-list');
+Route::get('/exam/list-by-ajax', 'School\ExamManagementController@examListByAjax')->name('exam-list-by-ajax');
+Route::get('/exam/deactivate', 'School\ExamManagementController@examDeactivate')->name('exam-deactivate');
+Route::get('/exam/activate', 'School\ExamManagementController@examActivate')->name('exam-activate');
+// Exam Management Section End
+
+
+
+
+
+
+
+
+
 // Student Type Management Section Start
 Route::get('/student-type', 'School\StudentTypeController@index')->name('student-type');
 Route::post('/student-type-add', 'School\StudentTypeController@studentTypeAdd')->name('student-type-add');

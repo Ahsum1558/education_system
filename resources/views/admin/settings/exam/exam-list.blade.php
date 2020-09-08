@@ -3,13 +3,13 @@
 <!--Content Start-->
 <section class="container-fluid">
 <div class="row content">
-    <div class="col-md-8 offset-md-2 pl-0 pr-0">
+    <div class="col-md-12 pl-0 pr-0">
 
         @include('admin.includes.alert')
 
         <div class="form-group">
             <div class="col-sm-12">
-                <h4 class="text-center font-weight-bold font-italic mt-3">Class Wise Batch List</h4>
+                <h4 class="text-center font-weight-bold font-italic mt-3">Class Wise Exam List</h4>
             </div>
         </div>
          <div class="table-responsive p-1">
@@ -35,7 +35,7 @@
                           </div>
                         <div class="col-md">
                             <div class="form-group row mb-0">
-                            <label for="typeId" class="col-form-label col-sm-3 text-right">Student Type</label>
+                            <label for="typeId" class="col-form-label col-sm-3 text-right">Course</label>
                             <div class="col-sm-9">
                                 <select name="type_id" class="form-control @error('type_id') is-invalid @enderror" id="typeId" required>
                                     <option value="">Select Coures</option>
@@ -53,8 +53,7 @@
                 
             </table>
         </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover text-center" id="batchList"></table>
+        <div class="table-responsive" id="examList">
         </div>
     </div>
 </div>
@@ -79,22 +78,48 @@
     });
 
      $('#typeId').change(function(){
-        var studentTypeId = $(this).val();
+        var typeId = $(this).val();
         var classId = $('#classId').val();
-        if(classId && studentTypeId){
+        if(classId && typeId){
             $('#overlay .loader').show();
-            $.get("{{ route('batch-list-by-ajax') }}", {
+            $.get("{{ route('exam-list-by-ajax') }}", {
                 class_id:classId,
-                type_id:studentTypeId,
+                type_id:typeId,
             }, function(data){
                 $('#overlay .loader').hide();
                 console.log(data);
-                $("#batchList").html(data);
+                $("#examList").html(data);
             })
         }else{
-            $("#batchList").empty();
+            $("#examList").empty();
         }
-    })
+    });
+
+     function examDeactivate(classId, typeId, examId){
+        $('#overlay .loader').show();
+        $.get("{{ route('exam-deactivate') }}", {
+            class_id:classId,
+            type_id:typeId,
+            exam_id:examId,
+        }, function(data){
+             $('#overlay .loader').hide();
+                // console.log(data);
+                $("#examList").empty().html(data);
+        });
+     };
+
+     function examActivate(classId, typeId, examId){
+        $('#overlay .loader').show();
+        $.get("{{ route('exam-activate') }}", {
+            class_id:classId,
+            type_id:typeId,
+            exam_id:examId,
+        }, function(data){
+             $('#overlay .loader').hide();
+                // console.log(data);
+                $("#examList").empty().html(data);
+        });
+     }
 </script>
 
 @endsection

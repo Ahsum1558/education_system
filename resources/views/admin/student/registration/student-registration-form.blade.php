@@ -49,7 +49,8 @@
 
             <div class="form-group col-md-6 mb-3">
                 <label for="fatherMobile" class="col-sm-4 col-form-label text-right">Father's Mobile No.</label>
-                <input type="text" name="father_mobile" class="form-control col-sm-8" id="fatherMobile" placeholder="8801XXXXXXXXX" value="" minlength="13" maxlength="13" required>
+                <input type="text" name="father_mobile" class="form-control col-sm-8" id="fatherMobile" placeholder="8801XXXXXXXXX" value="" required>
+                {{-- minlength="13" maxlength="13" --}}
                 <span class="text-danger"></span>
             </div>
 
@@ -67,7 +68,8 @@
 
             <div class="form-group col-md-6 mb-3">
                 <label for="motherMobile" class="col-sm-4 col-form-label text-right">Mother's Mobile No.</label>
-                <input type="text" name="mother_mobile" class="form-control col-sm-8" id="motherMobile" placeholder="8801XXXXXXXXX" value="" minlength="13" maxlength="13" required>
+                <input type="text" name="mother_mobile" class="form-control col-sm-8" id="motherMobile" placeholder="8801XXXXXXXXX" value="" required>
+                {{-- minlength="13" maxlength="13" --}}
                 <span class="text-danger"></span>
             </div>
 
@@ -85,7 +87,8 @@
 
             <div class="form-group col-md-6 mb-3">
                 <label for="smsMobile" class="col-sm-4 col-form-label text-right">SMS Mobile No.</label>
-                <input type="text" name="sms_mobile" class="form-control col-sm-8" id="smsMobile" placeholder="8801XXXXXXXXX" value="" minlength="13" maxlength="13" required>
+                <input type="text" name="sms_mobile" class="form-control col-sm-8" id="smsMobile" placeholder="8801XXXXXXXXX" value="" required>
+                {{-- minlength="13" maxlength="13"  --}}
                 <span class="text-danger"></span>
             </div>
 {{-- 
